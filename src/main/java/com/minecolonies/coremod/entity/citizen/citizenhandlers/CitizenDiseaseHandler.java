@@ -7,6 +7,7 @@ import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenDiseaseHandler;
 import com.minecolonies.coremod.MineColonies;
+import com.minecolonies.coremod.colony.buildings.workerbuildings.BuildingCook;
 import com.minecolonies.coremod.colony.jobs.AbstractJobGuard;
 import com.minecolonies.coremod.colony.jobs.JobHealer;
 import net.minecraft.nbt.CompoundNBT;
@@ -152,8 +153,8 @@ public class CitizenDiseaseHandler implements ICitizenDiseaseHandler
         this.disease = "";
         if (citizen.getCitizenSleepHandler().isAsleep())
         {
-            citizen.stopSleeping();
-            final BlockPos hospitalPos = citizen.getCitizenColonyHandler().getColony().getBuildingManager().getBestHospital(citizen);
+            citizen.wakeUp();
+            final BlockPos hospitalPos = citizen.getCitizenColonyHandler().getColony().getBuildingManager().getBestBuilding(citizen, BuildingCook.class);
             final IColony colony = citizen.getCitizenColonyHandler().getColony();
             final IBuilding hospital = colony.getBuildingManager().getBuilding(hospitalPos);
             if (hospital != null)
